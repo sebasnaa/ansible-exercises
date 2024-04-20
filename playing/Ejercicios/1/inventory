@@ -1,0 +1,11 @@
+[webservers]
+nodoa ansible_host=192.168.1.20 ansible_user=nodoa ansible_become_password=nodoa
+nodo2
+
+
+[dataservers]
+master ansible_host=192.168.1.21 ansible_user=master
+
+[proxy]
+nodo5
+

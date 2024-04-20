@@ -1,0 +1,7 @@
+- name: Borrar directorio y sub-carpetas
+  hosts: nodos
+  tasks:
+    - name: Borrar directorio y sub-carpetas
+      file:
+        path: "{{ ansible_env.HOME}}/directorio"
+        state: absent

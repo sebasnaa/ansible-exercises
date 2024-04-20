@@ -1,0 +1,5 @@
+- name: check Connection
+  hosts: nodoa
+  tasks:
+    - name: Ping host
+      ping:

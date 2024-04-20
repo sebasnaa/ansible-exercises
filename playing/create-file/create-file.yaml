@@ -1,0 +1,17 @@
+- name: Crear archivo en directorio
+  hosts: nodos
+  tasks:
+    - name: Crear directorio si no existe
+      file:
+        path: "{{ ansible_env.HOME}}/directorio"
+        state: directory
+
+    - name: Crear archivo en el directorio
+      file:
+        path: "{{ ansible_env.HOME}}/directorio/archivo.txt"
+        state: touch
+    - name: Agregar contenido al archivo
+      lineinfile:
+        path: "{{ ansible_env.HOME}}/directorio/archivo.txt"
+        line: "Contenido que deseas agregar"
+        create: yes  # Creará el archivo si no existe
