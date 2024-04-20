@@ -1,106 +1,50 @@
 # Ejercicios bucles
 
-1. Crear una lista web_service que contenga los elementos: httpd y vsftpd y crear una tarea que pregunte si el servicio está iniciado, recorriendo esos elementos con un bucle.
+1. Queremos mostrar los ficheros con `ls /`, `ls -a /`, `ls -la /` de aquellos nodos que sean Ubuntu.
 
-    ```yaml
-    - name: comprar si el servicio está ok
-    hosts: nodo1
-    vars:
-        web_service:
-        - httpd
-        - vsftpd
-    tasks:
-        - name: al lio
-        service:
-            name: "{{ item }}"
-            state: started 
-        loop: "{{ web_service }}"
-    ```
+2. Escribir una tarea que copie la lista de ficheros JSON que se acompaña desde `/home/usuario/json` a `/tmp/jsons`.
 
-2. Queremos comprimir los archivos del directorio ``/home/usuario/tomcat/logs`` que
-tengan extensión ``.log``, ``.out`` y ``.txt`` (se puede usar o no regex)
+3. Crear una tarea que instale con loop: `curl`, `apt-transport-https`, `ca-certificates`, `software-properties-common`, `glances`, `git` y `vim`.
 
-    ```yaml
-    - name: buscar y encontrar
-    hosts: nodo1
-    tasks:
-        - name: Primero encontrar
-        find:
-            paths: /home/usuario/tomcat/logs
-            patterns: '*.log,*.out,*.txt'
-        register: salida
+4. ¿Y si ahora queremos distinguir entre las distintas distribuciones de Linux? (No usar el módulo package)
+    - Primero distínguelas a través de tags.
+	- En segundo lugar distínguelas a partir de capturar qué distribución es la del host.
 
-        - name: comprimir
-        archive:
-            remove: yes
-            path : "{{ item.path }}"
-            dest : "{{ item.path }}.bz2"
-            format: bz2
-        loop: "{{ salida.files }}"
-    ``` 
+4. Ahora sí que sí vamos a instalar Nginx. Para ello tenemos que realizar las siguientes tareas:
+	- Instalar el propio Nginx con su apt update y todo.
+	- Permitir el paso a través de cortafuegos. Para ello, debemos escoger entre Nginx Full, Nginx HTTP, Nginx HTTPS.
+	- Verificar el status del cortafuegos. Capturar la salida para nos muestre que todo ha ido bien.
+	- Verificar que el servicio está funcionando.
+
+5. Crear una tarea que, dada una lista de usuarios y una lista de grupos como los anteriores, los combine todos contra todos creando el usuario y el grupo. 
 
 
+    Grupos:
+   - usuarios
+   - admin
+   - desarrollo
+   - testing
+   - produccion
 
-3. Descomprimir archivos de un usuario llamado weblogic, de un fichero llamado:
-server-jre-8u191-linux-x64.tar.gz al directorio ``/opt/oracle``
+    Usuarios:
+    - Pedro
+    - Juan
+    - Maria
+    - Ana
+    - Antonio
+    - Marta
+    - Jose
 
-    ```yaml
-    - name: buscar y encontrar
-    hosts: nodo1
-    tasks:
-    - name: descomprimo
-        unarchive:
-        src: /home/usuario/tomcat/logs/otromio.out.bz2
-        dest: /home/usuario/tomcat/logs
-        remote_src: yes
-    ```
+6. Ahora queremos ser más específicos y crear los usuarios con estas especificaciones:
 
-4. Validar que los paquetes están instalados. (Pista modulo package_facts)
-
-    ```yaml
-    - name: buscar y encontrar
-    hosts: nodo1
-    tasks:
-        - name: Gather the package facts
-        package_facts:
-            manager: auto
-
-        - name: Print the package facts
-        debug:
-            var: ansible_facts.packages
-
-        - name: Check whether a package called foobar is installed
-        debug:
-            msg: "{{ item }} está instalado"
-        when: '"{{ item }}" in ansible_facts.packages'
-        loop:
-            - apache2
-            - vim
-            - nginx
-            - filebeat 
-    ```
-
-5. Buscar ficheros .log que tengan 30 dias del directorio ``/var/log``y luego mostrar lo que ha salido
- 
-
-6. Búsqueda recursiva desde la ruta ``/`` aquellos que tengan más de 100 megas (Pista: módulo find)
-
- 
-7. Buscar con Regex en la ruta ``/var/log``, aquellos ficheros que empiecen por una letra minúcula entre la a y la z, tengan un guion bajo y después 8 numeros y que tengan extensión ``.log`` (además, que tengan más de 100 megas)
-
-    ```yaml
-    - name: buscar por vejez y tamaño
-    hosts: nodo1
-    tasks:
-        - name: buscar
-        find:
-            path: /home/usuario/
-            size: 10k
-            age: 10d
-            recurse: yes
-        register: salida
-        - name: imprime
-        debug:
-            var: "{{salida.path}}"
-    ```
-
+| Usuarios | Grupos a los que pertenece     | Expira la cuenta | uid  | Crear Clave SSH |
+|----------|--------------------------------|-------------------|------|-----------------|
+| Pedro    | admin, usuarios, produccion    | no                | 1040 | si, rsa 2048    |
+| Juan     | usuarios, desarrollo           | no                | 1041 | no              |
+| Maria    | usuarios, desarrollo           | no                | 1042 | no              |
+| Ana      | testing, produccion           | no                | 1043 | si, rsa 2048    |
+| Antonio  | usuarios, testing              | no                | 1044 | no              |
+| Marta    | usuarios, produccion           | no                | 1045 | no              |
+| Jose     | admin, usuarios, desarrollo    | no                | 1046 | si, rsa 2048    |
+| Invitado1| usuarios                        | si                | -    | no              |
+| Invitado2| usuarios                        | si                | -    | no              |
