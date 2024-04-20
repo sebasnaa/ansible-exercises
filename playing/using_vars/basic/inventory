@@ -5,3 +5,8 @@ master ansible_host=192.168.1.21 ansible_user=master
 
 [nodos:vars]
 nombre="sebas from grupo"
+
+Group vars
+Node vars
+PlayBook vars
+Extra vars

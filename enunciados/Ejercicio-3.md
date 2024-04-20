@@ -27,4 +27,17 @@
       zone: internal
       state: enable
 
-2. Crear variables en el scope de playbook 
+2. Definir un playbbok donde se pida al usuario el entorno de despliegue para cargar las variables del fichero correspondiente al entorno. 
+
+
+
+3. Siguiendo la documentación de ansible obtener estos valores de un nuestro máquina local como de un nodo: `os family` , `hostname` y `ipv4`
+
+
+4. Usar el módulo `setup` para obtener la ipv6 del nodo, utilizando comandos ad-hoc. El resultado se debe almacenarse en un fichero, todo se debe ejecutar en un único comando.
+
+
+
+5. Crea un fact personalizado que te permita obtener la variable `db_user_name` del nodo administrado. (Si no existe creala)
+  
+  TODO

@@ -1,0 +1,16 @@
+- name: Gather Facts Example
+  hosts: nodoa
+  # gather_facts: yes
+  tasks:
+    - name: Print OS Family
+      debug:
+msg: "OS Family is {{ ansible_facts['os_family'] }}"
+        # msg: "OS Family is"
+
+    # - name: Print Hostname
+    #   debug:
+    #     msg: "Hostname is {{ ansible_facts['hostname'] }}"
+
+    # - name: Print IPv4 Address
+    #   debug:
+    #     msg: "IPv4 Address is {{ ansible_facts['default_ipv4']['address'] }}"
