@@ -4,9 +4,9 @@
 
 3. Crear una tarea que instale con loop: `curl`, `apt-transport-https`, `ca-certificates`, `software-properties-common`, `glances`, `git` y `vim`.
 
-	3.2. ¿Y si ahora queremos distinguir entre las distintas distribuciones de Linux? (No usar el módulo package) 
-		- Primero distínguelas a través de tags.
-		- En segundo lugar distínguelas a partir de capturar qué distribución es la del host.
+4. ¿Y si ahora queremos distinguir entre las distintas distribuciones de Linux? (No usar el módulo package)
+    - Primero distínguelas a través de tags.
+	- En segundo lugar distínguelas a partir de capturar qué distribución es la del host.
 
 4. Ahora sí que sí vamos a instalar Nginx. Para ello tenemos que realizar las siguientes tareas:
 	- Instalar el propio Nginx con su apt update y todo.
