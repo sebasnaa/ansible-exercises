@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1. Queremos mostrar los ficheros con `ls /`, `ls -a /`, `ls -la /` de aquellos nodos que sean Ubuntu.
 
 2. Escribir una tarea que copie la lista de ficheros JSON que se acompaña desde `/home/usuario/json` a `/tmp/jsons`.
@@ -46,3 +47,7 @@
 | Jose     | admin, usuarios, desarrollo    | no                | 1046 | si, rsa 2048    |
 | Invitado1| usuarios                        | si                | -    | no              |
 | Invitado2| usuarios                        | si                | -    | no              |
+=======
+## Variables y facts
+
+>>>>>>> 630ea2f7bfd0a25b5037f7a25d4f775f5687394f
