@@ -1,0 +1,22 @@
+---
+- name: Choose environment and load variable files
+  hosts: localhost
+  vars_prompt:
+    - name: entorno
+      prompt: "Choose environment (dev, staging, prod)"
+      private: false
+      # default: "dev"
+      choices:
+        - dev
+        - staging
+        - prod
+  tasks:
+
+    - name: Fail if the chosen environment is not in the list of choices
+      fail:
+        msg: "Invalid environment provided. Please choose one of the following: dev, staging, prod"
+      when: entorno not in ['dev', 'staging', 'prod']
+
+    - name: Load variables based on chosen environment
+      include_vars:
+        file: "vars/{{ entorno }}.yml"

@@ -1,8 +1,0 @@
-- name: Ejemplo de uso de vars_files
-  hosts: nodoa
-  vars_files:
-    - variables.yml
-  tasks:
-    - name: Imprimir variables cargadas
-      debug:
-        msg: hola {{ db_password }} {{db_user }} {{db_host}}

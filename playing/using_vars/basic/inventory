@@ -1,0 +1,7 @@
+[nodos]
+nodoa ansible_host=192.168.1.20 ansible_user=nodoa nombre="sebas from nodo "
+master ansible_host=192.168.1.21 ansible_user=master
+
+
+[nodos:vars]
+nombre="sebas from grupo"

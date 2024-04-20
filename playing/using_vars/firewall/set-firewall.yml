@@ -1,8 +1,3 @@
-## Variables y facts
-
-
-1. Parametrizar todos los valores posibles con cierto sentido mediante un fichero de variables.
-
 - name: Configurar firewall
   hosts: web
   tasks:
@@ -26,5 +21,3 @@
       source: 192.168.20.0/24   
       zone: internal
       state: enable
-
-2. Crear variables en el scope de playbook 
